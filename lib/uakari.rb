@@ -1,6 +1,7 @@
 require 'httparty'
 require 'json'
 require 'cgi'
+require 'support/sts_api_response_parser'
 
 if defined?(ActionMailer)
   require File.join(File.dirname(__FILE__), 'handlers', 'uakari_delivery_handler')
@@ -40,7 +41,9 @@ class Uakari
     url = "#{base_api_url}#{method}"
     params = @default_params.merge(params)
     response = self.class.post(url, :body => params, :timeout => @timeout)
-          
+    
+    response = STSApiResponseParser.parse(response)
+                          
     if response["http_code"] && (response["http_code"] != 200)
       raise MailchimpSTSApiError, response.body
     end
