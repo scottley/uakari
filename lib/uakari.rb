@@ -1,8 +1,12 @@
 require 'httparty'
 require 'json'
 require 'cgi'
+
 if defined?(ActionMailer)
   require File.join(File.dirname(__FILE__), 'handlers', 'uakari_delivery_handler')
+end
+
+class MailchimpSTSApiError < StandardError
 end
 
 class Uakari
@@ -36,12 +40,13 @@ class Uakari
     url = "#{base_api_url}#{method}"
     params = @default_params.merge(params)
     response = self.class.post(url, :body => params, :timeout => @timeout)
-
-    begin
-      response = JSON.parse(response.body)
-    rescue
-      response = JSON.parse('['+response.body+']').first
+          
+    if response["http_code"] && (response["http_code"] != 200)
+      raise MailchimpSTSApiError, response.body
     end
+    
+    puts response.to_yaml
+
     response
   end
 
