@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.2.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Amro Mousa"]
-  s.date = "2011-12-31"
+  s.authors = ["Amro Mousa", "Scott Simon"]
+  s.date = "2012-02-02"
   s.description = "Uakari a API wrapper for the MailChimp STS API (1.0), which wraps Amazon SES."
-  s.email = "amromousa@gmail.com"
+  s.email = "scott@voiceboxpdx.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.markdown"
@@ -20,11 +20,13 @@ Gem::Specification.new do |s|
     ".document",
     "Gemfile",
     "Gemfile.lock",
+    "Guardfile",
     "LICENSE.txt",
     "README.markdown",
     "Rakefile",
     "VERSION",
     "lib/handlers/uakari_delivery_handler.rb",
+    "lib/support/api_response_parser.rb",
     "lib/uakari.rb",
     "rdoc/Uakari.html",
     "rdoc/created.rid",
@@ -32,17 +34,17 @@ Gem::Specification.new do |s|
     "rdoc/lib/uakari_rb.html",
     "rdoc/rdoc.css",
     "test/helper.rb",
-    "test/test_uakari.rb",
+    "test/uakari_test.rb",
     "uakari.gemspec"
   ]
-  s.homepage = "http://github.com/amro/uakari"
+  s.homepage = "http://github.com/scottley/uakari"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.11"
   s.summary = "Uakari a API wrapper for the MailChimp STS API (1.0)"
   s.test_files = [
     "test/helper.rb",
-    "test/test_uakari.rb"
+    "test/uakari_test.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -51,20 +53,26 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<json>, ["> 1.4.0"])
       s.add_runtime_dependency(%q<httparty>, ["> 0.6.0"])
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<guard>, ["~> 0.10.0"])
+      s.add_development_dependency(%q<guard-test>, ["~> 0.4.3"])
+      s.add_development_dependency(%q<shoulda>, ["~> 2.11.3"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.1"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<rcov>, ["~> 0.9.11"])
+      s.add_development_dependency(%q<mocha>, ["~> 0.10.0"])
       s.add_runtime_dependency(%q<httparty>, ["> 0.6.0"])
       s.add_runtime_dependency(%q<json>, [">= 1.4.0"])
       s.add_runtime_dependency(%q<actionmailer>, [">= 3.0.0"])
     else
       s.add_dependency(%q<json>, ["> 1.4.0"])
       s.add_dependency(%q<httparty>, ["> 0.6.0"])
-      s.add_dependency(%q<shoulda>, [">= 0"])
+      s.add_dependency(%q<guard>, ["~> 0.10.0"])
+      s.add_dependency(%q<guard-test>, ["~> 0.4.3"])
+      s.add_dependency(%q<shoulda>, ["~> 2.11.3"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
-      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<rcov>, ["~> 0.9.11"])
+      s.add_dependency(%q<mocha>, ["~> 0.10.0"])
       s.add_dependency(%q<httparty>, ["> 0.6.0"])
       s.add_dependency(%q<json>, [">= 1.4.0"])
       s.add_dependency(%q<actionmailer>, [">= 3.0.0"])
@@ -72,10 +80,13 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<json>, ["> 1.4.0"])
     s.add_dependency(%q<httparty>, ["> 0.6.0"])
-    s.add_dependency(%q<shoulda>, [">= 0"])
+    s.add_dependency(%q<guard>, ["~> 0.10.0"])
+    s.add_dependency(%q<guard-test>, ["~> 0.4.3"])
+    s.add_dependency(%q<shoulda>, ["~> 2.11.3"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
-    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<rcov>, ["~> 0.9.11"])
+    s.add_dependency(%q<mocha>, ["~> 0.10.0"])
     s.add_dependency(%q<httparty>, ["> 0.6.0"])
     s.add_dependency(%q<json>, [">= 1.4.0"])
     s.add_dependency(%q<actionmailer>, [">= 3.0.0"])

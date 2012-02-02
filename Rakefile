@@ -13,12 +13,12 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "uakari"
-  gem.homepage = "http://github.com/amro/uakari"
+  gem.homepage = "http://github.com/scottley/uakari"
   gem.license = "MIT"
   gem.summary = %Q{Uakari a API wrapper for the MailChimp STS API (1.0)}
   gem.description = %Q{Uakari a API wrapper for the MailChimp STS API (1.0), which wraps Amazon SES.}
-  gem.email = "amromousa@gmail.com"
-  gem.authors = ["Amro Mousa"]
+  gem.email = "scott@voiceboxpdx.com"
+  gem.authors = ["Amro Mousa","Scott Simon"]
 
   gem.add_runtime_dependency 'httparty', '> 0.6.0'
   gem.add_runtime_dependency 'json', '>= 1.4.0'
@@ -29,14 +29,14 @@ Jeweler::RubygemsDotOrgTasks.new
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/**/*_test.rb'
   test.verbose = true
 end
 
 require 'rcov/rcovtask'
 Rcov::RcovTask.new do |test|
   test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/**/*_test.rb'
   test.verbose = true
 end
 
