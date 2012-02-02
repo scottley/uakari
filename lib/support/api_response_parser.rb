@@ -1,6 +1,6 @@
 require 'json'
 
-class STSApiResponseParser
+class ApiResponseParser
   
   class << self
   

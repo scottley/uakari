@@ -1,7 +1,7 @@
 require 'httparty'
 require 'json'
 require 'cgi'
-require 'support/sts_api_response_parser'
+require 'support/api_response_parser'
 
 if defined?(ActionMailer)
   require File.join(File.dirname(__FILE__), 'handlers', 'uakari_delivery_handler')
@@ -14,7 +14,7 @@ class Uakari
   include HTTParty
   default_timeout 30
 
-  attr_accessor :api_key, :timeout, :options
+  attr_accessor :api_key, :timeout
 
   def initialize(api_key = nil, extra_params = {})
     @api_key = api_key || ENV['MC_API_KEY'] || ENV['MAILCHIMP_API_KEY'] || self.class.api_key
@@ -42,7 +42,7 @@ class Uakari
     params = @default_params.merge(params)
     response = self.class.post(url, :body => params, :timeout => @timeout)
     
-    response = STSApiResponseParser.parse(response)
+    response = ApiResponseParser.parse(response)
                           
     if response["http_code"] && (response["http_code"] != 200)
       raise MailchimpSTSApiError, response.body
