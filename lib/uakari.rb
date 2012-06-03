@@ -45,10 +45,8 @@ class Uakari
     response = ApiResponseParser.parse(response)
                           
     if response["http_code"] && (response["http_code"] != 200)
-      raise MailchimpSTSApiError, response.body
+      raise MailchimpSTSApiError, response
     end
-    
-    puts response.to_yaml
 
     response
   end
